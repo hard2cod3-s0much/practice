@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Учёт выполнения лабораторных работ</h1>
+
+<form method="get" class="filter-form">
+    <label>Дисциплина:
+        <select name="discipline_id" onchange="this.form.submit()">
+            <option value="">Все</option>
+            {% for d in disciplines %}
+            <option value="{{ d.id }}" {% if discipline_id==d.id %}selected{% endif %}>{{ d.name }}</option>
+            {% endfor %}
+        </select>
+    </label>
+</form>
+
+<table class="table tracking-table">
+    <tr>
+        <th>Студент</th>
+        {% for l in labs %}
+        <th>№{{ l.number }}<br><small>{{ l.title }}</small></th>
+        {% endfor %}
+    </tr>
+    {% for s in students %}
+    <tr>
+        <td>{{ s.full_name }}</td>
+        {% for l in labs %}
+        {% set c = completions_map.get((s.id, l.id)) %}
+        <td class="status-cell status-{{ c.status if c else 'not_started' }}">
+            <form method="post" action="{{ url_for('tracking', discipline_id=discipline_id) }}">
+                <input type="hidden" name="completion_id" value="{{ c.id if c else '' }}">
+                <select name="status" onchange="this.form.submit()">
+                    {% for key, label in statuses.items() %}
+                    <option value="{{ key }}" {% if c and c.status==key %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+                {% if c and c.status == 'done' %}
+                <input type="number" name="score" value="{{ c.score or '' }}" min="0"
+                       max="{{ l.max_score }}" placeholder="балл" class="score-input">
+                {% endif %}
+            </form>
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

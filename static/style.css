@@ -1,0 +1,272 @@
+* { box-sizing: border-box; }
+
+:root {
+    --ink: #1C2B45;
+    --ink-soft: #4A5872;
+    --paper: #F7F8FA;
+    --line: #D9DEE6;
+    --done: #3A6B5C;
+    --done-bg: #EAF2EF;
+    --pending: #B8862E;
+    --pending-bg: #FBF3E4;
+    --not-started: #9E3A2E;
+    --not-started-bg: #FBEEEC;
+}
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 15px;
+}
+
+h1, h2, h3 {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 4px;
+}
+
+h1 { font-size: 28px; margin-bottom: 20px; }
+h2 { font-size: 19px; margin-top: 32px; margin-bottom: 12px; }
+
+/* ---------- LAYOUT ---------- */
+
+.layout { display: flex; min-height: 100vh; }
+
+.sidebar {
+    width: 232px;
+    flex-shrink: 0;
+    background: var(--ink);
+    color: #E7EAF0;
+    padding: 28px 20px;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(231, 234, 240, 0.15);
+}
+
+.brand-mark {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    color: #7FA895;
+}
+
+.brand-text {
+    font-family: 'Lora', serif;
+    font-size: 15px;
+    line-height: 1.25;
+    color: #E7EAF0;
+}
+
+.nav-links { display: flex; flex-direction: column; gap: 2px; }
+
+.nav-links a {
+    color: #B9C1D1;
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 3px;
+    font-size: 14px;
+    border-left: 2px solid transparent;
+}
+
+.nav-links a:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+    border-left-color: #7FA895;
+}
+
+.content {
+    margin-left: 232px;
+    padding: 40px 48px;
+    max-width: 980px;
+    width: 100%;
+}
+
+/* ---------- FLASH ---------- */
+
+.flash {
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    border-left: 3px solid var(--done);
+    background: var(--done-bg);
+    color: var(--done);
+    font-size: 14px;
+}
+
+/* ---------- BUTTONS ---------- */
+
+.btn {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    padding: 9px 16px;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    margin-bottom: 16px;
+}
+
+.btn:hover { background: #2A3E63; }
+
+.link-btn {
+    background: none;
+    border: none;
+    color: var(--not-started);
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0;
+    text-decoration: underline;
+}
+
+/* ---------- TABLE (ledger style) ---------- */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+}
+
+.table th {
+    text-align: left;
+    font-size: 12px;
+    text-transform: none;
+    color: var(--ink-soft);
+    font-weight: 600;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--ink);
+}
+
+.table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+}
+
+.table tr:hover td { background: #FBFCFD; }
+
+.table a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+.table a:hover { border-bottom-color: var(--ink); }
+
+/* ---------- FORMS ---------- */
+
+.form { max-width: 420px; }
+
+.form label {
+    display: block;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+
+.form input, .form select {
+    display: block;
+    width: 100%;
+    padding: 9px 10px;
+    margin-top: 6px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink);
+    background: #fff;
+}
+
+.form input:focus, .form select:focus {
+    outline: none;
+    border-color: var(--ink);
+}
+
+/* ---------- DASHBOARD STATS ---------- */
+
+.cards {
+    display: flex;
+    gap: 0;
+    margin-bottom: 8px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.card {
+    flex: 1;
+    padding: 18px 4px;
+    text-align: left;
+    border-right: 1px solid var(--line);
+}
+
+.card:last-child { border-right: none; }
+
+.card .num {
+    display: block;
+    font-family: 'Lora', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.1;
+}
+
+.card span:last-child {
+    font-size: 12px;
+    color: var(--ink-soft);
+}
+
+/* ---------- PROGRESS ---------- */
+
+.progress-bar {
+    background: var(--line);
+    height: 4px;
+    width: 110px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.progress-fill { background: var(--done); height: 100%; }
+
+/* ---------- TRACKING MATRIX ---------- */
+
+.filter-form { margin-bottom: 8px; }
+
+.filter-form select {
+    padding: 7px 10px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    font-family: inherit;
+    background: #fff;
+}
+
+.tracking-table th small {
+    display: block;
+    font-weight: 400;
+    color: var(--ink-soft);
+}
+
+.tracking-table td.status-cell { border-left: 3px solid transparent; }
+.tracking-table td.status-not_started { border-left-color: var(--not-started); background: var(--not-started-bg); }
+.tracking-table td.status-in_progress { border-left-color: var(--pending); background: var(--pending-bg); }
+.tracking-table td.status-done { border-left-color: var(--done); background: var(--done-bg); }
+
+.tracking-table select {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--ink);
+}
+
+.score-input {
+    width: 52px;
+    margin-top: 4px;
+    padding: 3px 6px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+ }    

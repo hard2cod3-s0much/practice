@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ student.full_name }} ({{ student.group_name }})</h1>
+
+<table class="table">
+    <tr><th>Дисциплина</th><th>Лаб. работа</th><th>Статус</th><th>Дата сдачи</th><th>Оценка</th></tr>
+    {% for c in completions %}
+    <tr>
+        <td>{{ c.lab_work.discipline.name }}</td>
+        <td>№{{ c.lab_work.number }} {{ c.lab_work.title }}</td>
+        <td>{{ statuses[c.status] }}</td>
+        <td>{{ c.submitted_on or '—' }}</td>
+        <td>{{ c.score if c.score is not none else '—' }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

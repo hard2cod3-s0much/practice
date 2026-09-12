@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Новая лабораторная работа</h1>
+<form method="post" class="form">
+    <label>Дисциплина
+        <select name="discipline_id" required>
+            {% for d in disciplines %}
+            <option value="{{ d.id }}">{{ d.name }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label>Номер работы
+        <input type="number" name="number" min="1" required>
+    </label>
+    <label>Название
+        <input type="text" name="title" required>
+    </label>
+    <label>Максимальный балл
+        <input type="number" name="max_score" value="5" min="1">
+    </label>
+    <button type="submit" class="btn">Сохранить</button>
+</form>
+{% endblock %}

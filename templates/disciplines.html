@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Дисциплины</h1>
+<a class="btn" href="{{ url_for('discipline_new') }}">+ Добавить дисциплину</a>
+
+<table class="table">
+    <tr><th>Название</th><th>Лаб. работ</th><th></th></tr>
+    {% for d in disciplines %}
+    <tr>
+        <td>{{ d.name }}</td>
+        <td>{{ d.labs|length }}</td>
+        <td>
+            <form method="post" action="{{ url_for('discipline_delete', discipline_id=d.id) }}" style="display:inline"
+                  onsubmit="return confirm('Удалить дисциплину и все её лаб. работы?');">
+                <button type="submit" class="link-btn">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

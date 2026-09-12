@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Панель мониторинга</h1>
+
+<div class="cards">
+    <div class="card"><span class="num">{{ students_count }}</span><span>студентов</span></div>
+    <div class="card"><span class="num">{{ disciplines_count }}</span><span>дисциплин</span></div>
+    <div class="card"><span class="num">{{ labs_count }}</span><span>лаб. работ</span></div>
+</div>
+
+<h2>Прогресс по студентам</h2>
+<table class="table">
+    <tr><th>ФИО</th><th>Группа</th><th>Выполнено</th><th>Прогресс</th></tr>
+    {% for row in stats %}
+    <tr>
+        <td><a href="{{ url_for('student_detail', student_id=row.student.id) }}">{{ row.student.full_name }}</a></td>
+        <td>{{ row.student.group_name }}</td>
+        <td>{{ row.done }} / {{ row.total }}</td>
+        <td>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {{ row.percent }}%;"> </div>
+            </div>
+            {{ row.percent }}%
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

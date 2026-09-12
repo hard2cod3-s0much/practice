@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Лабораторные работы</h1>
+<a class="btn" href="{{ url_for('lab_new') }}">+ Добавить лаб. работу</a>
+
+<table class="table">
+    <tr><th>Дисциплина</th><th>№</th><th>Название</th><th>Макс. балл</th><th></th></tr>
+    {% for l in labs %}
+    <tr>
+        <td>{{ l.discipline.name }}</td>
+        <td>{{ l.number }}</td>
+        <td>{{ l.title }}</td>
+        <td>{{ l.max_score }}</td>
+        <td>
+            <form method="post" action="{{ url_for('lab_delete', lab_id=l.id) }}" style="display:inline"
+                  onsubmit="return confirm('Удалить лаб. работу?');">
+                <button type="submit" class="link-btn">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

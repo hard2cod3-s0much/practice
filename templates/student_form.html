@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ 'Редактирование' if student else 'Новый студент' }}</h1>
+<form method="post" class="form">
+    <label>ФИО
+        <input type="text" name="full_name" value="{{ student.full_name if student else '' }}" required>
+    </label>
+    <label>Группа
+        <input type="text" name="group_name" value="{{ student.group_name if student else '' }}" required>
+    </label>
+    <button type="submit" class="btn">Сохранить</button>
+</form>
+{% endblock %}
