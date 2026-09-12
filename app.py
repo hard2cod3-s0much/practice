@@ -256,8 +256,8 @@ def tracking():
                             disciplines=disciplines, discipline_id=discipline_id,
                             completions_map=completions_map, statuses=STATUS_LABELS)
 
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
